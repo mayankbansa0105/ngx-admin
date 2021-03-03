@@ -3,10 +3,9 @@ ENV NG_CLI_ANALYTICS=ci
 RUN apt update -y && apt-get install python  -y
 WORKDIR /app
 COPY . .
-RUN export NG_CLI_ANALYTICS=ci &&  npm install
-RUN export NG_CLI_ANALYTICS=ci && npm run build:prod
-
-FROM nginx:latest
+RUN   export  NG_CLI_ANALYTICS=ci && npm install && npm run build:prod
+FROM nginx:stable
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=build /app/dist /usr/share/nginx/html
+HEALTHCHECK CMD curl --fail http://localhost || exit 1
 CMD ["nginx", "-g", "daemon off;"]
