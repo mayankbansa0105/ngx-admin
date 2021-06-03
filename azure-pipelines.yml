@@ -15,6 +15,6 @@ steps:
     serviceConnectionEndpoint: 'synkconnection'
     testType: 'app'
     monitorOnBuild: true
-    failOnIssues: true
+    failOnIssues: false
     projectName: 'webapp'
     organization: 'mayankbansal0105'
