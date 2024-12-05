@@ -4,7 +4,7 @@ RUN apt update -y && apt-get install python  -y
 WORKDIR /app
 COPY . .
 RUN   export  NG_CLI_ANALYTICS=ci && npm install && npm run build:prod
-FROM nginx:stable
+FROM nginx:1
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=build /app/dist /usr/share/nginx/html
 HEALTHCHECK CMD curl --fail http://localhost || exit 1
